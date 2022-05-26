@@ -2,51 +2,23 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Rotate : MonoBehaviour
+public class rotate : MonoBehaviour
 {
-	Rigidbody rigid;
-	
-	private const float MAX_SPEED_ANGLE = -20;
-	private const float ZERO_SPEED_ANGLE = 210;
-	
-	private Transform needleTransform;
-	
-	private float speedMax;
-	private float speed;
-	
-	private GUIStyle guiStyle = new GUIStyle(); //create a new variable
-	
+    // Start is called before the first frame update
     void Start()
     {
-        //needleTransform = transform.Find("Needle");
-		
-		//speed = 0f;
-		//speedMax = 200f;
+        
     }
 
+    // Update is called once per frame
     void Update()
     {
-		//speed += 30f * Time.deltaTime;
-		//if (speed > speedMax) speed = speedMax;
+        if (Input.GetKey (KeyCode.A)) {
+			transform.Rotate (0.0f, 0.0f, 90.0f*Time.deltaTime);
+		}
 		
-		//needleTransform.eulerAngles = new Vector3(0, 0, GetSpeedRotation());
-		
-		rigid = GameObject.Find("CAR").GetComponent<Rigidbody>();
-		Vector3 velocity = rigid.velocity;
-		Debug.Log("SPEED = " + velocity);
-		
+		if (Input.GetKey (KeyCode.D)) {
+			transform.Rotate (0.0f, 0.0f, -90.0f*Time.deltaTime);
+		}
     }
-	
-	void OnGUI(){
-		Vector3 velocity = rigid.velocity;
-		GUI.Label (new Rect(Screen.width, Screen.height, 300, 50), velocity.ToString());
-		guiStyle.fontSize = 250; //change the font size
-        GUILayout.Label(velocity.ToString(), guiStyle);
-	}
-	
-	/*private float GetSpeedRotation() {
-		float totalAngleSize = ZERO_SPEED_ANGLE - MAX_SPEED_ANGLE;
-		float speedNormalized = speed / speedMax;
-		return ZERO_SPEED_ANGLE - speedNormalized * totalAngleSize;
-	}*/
 }
